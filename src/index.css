@@ -16,9 +16,14 @@
   .menu-active {
     @apply border-solid border border-border-color bg-white;
   }
+  .todo-complete {
+    @apply line-through text-[#BEBEBE] !important;
+  }
 }
 
-.rotating-element {
-  transform: rotate(180deg);
-  transition: all 0.3s;
+.unselectable {
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none; /* 标准语法 */
 }

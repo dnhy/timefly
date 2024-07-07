@@ -1,12 +1,13 @@
-/* eslint-disable react/button-has-type */
 import React, { useState } from 'react';
 import { useRoutes } from 'react-router-dom';
-import Head from './components/Head';
-import Menubar from './components/Menubar';
-import TaskProgress from './components/TaskProgress';
+import Head from '@/components/Head';
+import Menubar from '@/components/Menubar';
+import TaskProgress from '@/components/TaskProgress';
 import routes from './routes';
+import Navbar from '@/components/Navbar';
+import Detail from '@/components/Detail';
 
-export default function Index() {
+export default function App() {
   const element = useRoutes(routes);
 
   const [collapse, setCollapse] = useState(false);
@@ -15,9 +16,9 @@ export default function Index() {
     setCollapse(!collapse);
   }
   return (
-    <div className="w-full h-full min-h-screen bg-slate-400 flex relative">
+    <div className="w-full h-full min-h-screen  flex unselectable">
       <div
-        className={`${!collapse ? 'w-80' : 'w-24'} bg-grey-color transition-all`}
+        className={`${collapse ? 'w-20' : 'w-80'} bg-grey-color transition-all relative`}
       >
         <Head showMenu={showMenu} collapse={collapse} />
         <Menubar routes={routes} collapse={collapse} />
@@ -25,7 +26,7 @@ export default function Index() {
 
         {collapse && (
           <img
-            className="w-8 h-8  absolute  bottom-3 left-8 right-0 cursor-pointer"
+            className="w-8 h-8  absolute  bottom-3 left-1/2 -translate-x-1/2"
             src={require('./images/img_expand.png')}
             alt=""
             onClick={showMenu}
@@ -33,8 +34,16 @@ export default function Index() {
         )}
       </div>
 
-      <div className="w-1/2 bg-[#75a3ff] ">{element}</div>
-      <div className="flex-1 bg-[#70ff75]" />
+      <div className="flex-1 flex">
+        <div className="w-2/3 border-x">
+          <Navbar routes={routes} />
+          <hr className="bg-[#F2F2F2] mt-4" />
+          {element}
+        </div>
+        <div className="flex-1">
+          <Detail />
+        </div>
+      </div>
     </div>
   );
 }

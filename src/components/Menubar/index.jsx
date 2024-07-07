@@ -2,10 +2,18 @@ import React from 'react';
 import { Popover } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ExclamationCircleTwoTone } from '@ant-design/icons';
+import useHandleRoutes from '@/hooks/useHandleRoutes';
+import { DEFAULTTITLE } from '@/constants';
 
 export default function Menubar({ routes, collapse }) {
   const { pathname } = useLocation();
+
   const navigate = useNavigate();
+  const general = useHandleRoutes(routes);
+  console.log('general :', general);
+
+  const obj = general.find((e) => e.path === pathname);
+  document.title = obj?.meta.title || DEFAULTTITLE;
 
   const content = (
     <div>
@@ -28,7 +36,7 @@ export default function Menubar({ routes, collapse }) {
       >
         General
       </div>
-      {routes
+      {general
         .filter((e) => e.meta !== undefined && !e.meta.hidden)
         // eslint-disable-next-line arrow-body-style
         .map((e) => {
@@ -36,7 +44,7 @@ export default function Menubar({ routes, collapse }) {
             <div
               key={e.path}
               onClick={handleMenuClick(e)}
-              className={`w-4/5 mx-auto px-5 py-1 rounded-main-theme cursor-pointer mb-6  ${
+              className={`w-3/5 mx-auto  py-1 rounded-main-theme cursor-pointer mb-6  ${
                 pathname === e.path ? 'menu-active' : ''
               } ${e.meta.forbidden ? ' opacity-50 ' : ''}`}
             >
