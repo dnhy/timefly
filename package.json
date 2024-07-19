@@ -17,6 +17,7 @@
     "react-router-dom": "^6.24.1",
     "react-scripts": "5.0.1",
     "redux": "^5.0.1",
+    "redux-thunk": "^3.1.0",
     "sass-loader": "^14.2.1",
     "web-vitals": "^2.1.4"
   },
@@ -54,6 +55,7 @@
     "postcss": "^8.4.39",
     "prettier": "3.3.2",
     "react-app-rewired": "^2.2.1",
+    "redux-devtools-extension": "^2.13.9",
     "tailwindcss": "^3.4.4"
   }
 }

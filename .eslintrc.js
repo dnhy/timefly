@@ -82,13 +82,7 @@ module.exports = {
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
     'react/sort-comp': 'off',
-    indent: [
-      'warn',
-      2,
-      {
-        ignoredNodes: ['TemplateLiteral'],
-      },
-    ],
+    indent: ['off', 2],
     'template-curly-spacing': 'off',
   },
   globals: {

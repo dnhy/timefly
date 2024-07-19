@@ -9,6 +9,7 @@ module.exports = {
         'grey-text-color': '#C3C3C3',
         'grey-color': '#F3F4F6',
         'border-color': '#B8B8B8',
+        'label-color': '#6e6ee3',
       },
       borderRadius: {
         'main-theme': '12px',

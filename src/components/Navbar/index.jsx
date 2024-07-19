@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Point from '../Point';
 import { capitalizeFirstLatter } from '@/utils/index';
 
-export default function Navbar({ routes }) {
+export default function Navbar() {
   const { pathname } = useLocation();
   const routeArr = pathname.split('/').filter((item) => item !== '');
   return (

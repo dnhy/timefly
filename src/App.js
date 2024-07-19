@@ -6,11 +6,16 @@ import TaskProgress from '@/components/TaskProgress';
 import routes from './routes';
 import Navbar from '@/components/Navbar';
 import Detail from '@/components/Detail';
+import { useCurrRoute } from '@/hooks';
 
 export default function App() {
   const element = useRoutes(routes);
 
   const [collapse, setCollapse] = useState(false);
+
+  const {
+    meta: { hasDetail },
+  } = useCurrRoute(routes);
 
   function showMenu() {
     setCollapse(!collapse);
@@ -35,14 +40,16 @@ export default function App() {
       </div>
 
       <div className="flex-1 flex">
-        <div className="w-2/3 border-x">
+        <div className={`${hasDetail ? 'w-2/3' : 'w-full'}  border-x`}>
           <Navbar routes={routes} />
           <hr className="bg-[#F2F2F2] mt-4" />
           {element}
         </div>
-        <div className="flex-1">
-          <Detail />
-        </div>
+        {hasDetail && (
+          <div className="flex-1">
+            <Detail />
+          </div>
+        )}
       </div>
     </div>
   );

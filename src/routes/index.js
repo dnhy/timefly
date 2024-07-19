@@ -22,6 +22,7 @@ export default [
           icon: require('../images/img_todo.png'),
           hidden: false,
           forbidden: false,
+          hasDetail: true,
         },
       },
       {

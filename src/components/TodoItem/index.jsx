@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Checkbox } from 'antd';
 import { ConfigProvider } from 'antd';
 import { Tag } from 'antd';
+import { connect } from 'react-redux';
+import { selectTodo } from '@/redux/actions/todos';
 import DataTag from '@/components/DataTag';
 import DataTagWrap from '@/components/DataTagWrap';
 
-export default function TodoItem({ id, name, complete, onChangeComplete }) {
+function TodoItem({
+  todo,
+  onChangeComplete,
+  selectTodo: selectTodoFunc,
+  selectItem,
+}) {
+  const { todoname, complete } = todo;
   const dataTags = [
     {
       inActiveImg: require('@/images/img_link.png'),
@@ -24,6 +32,9 @@ export default function TodoItem({ id, name, complete, onChangeComplete }) {
     },
   ];
   const [isHover, setIsHover] = useState(false);
+
+  const isChoose = useMemo(() => selectItem?.id === todo.id, [selectItem]);
+
   const handleMouseEnter = () => {
     setIsHover(true);
   };
@@ -31,20 +42,25 @@ export default function TodoItem({ id, name, complete, onChangeComplete }) {
   const handleMouseLeave = () => {
     setIsHover(false);
   };
+
+  function handleClick() {
+    selectTodoFunc(todo);
+  }
   return (
     <div
-      className={`rounded-main-theme mb-4 cursor-pointer menu-active mx-6 px-3 py-2 ${isHover ? 'bg-main-theme' : ''} ${complete ? 'bg-[#F6F6F6]' : ''}`}
+      className={`rounded-main-theme mb-4 cursor-pointer menu-active mx-6 px-3 py-2 ${isHover ? 'border-main-theme' : ''} ${isChoose ? 'bg-main-theme' : ''} ${complete ? 'bg-[#F6F6F6]' : ''}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
     >
       <ConfigProvider
         theme={{ token: { colorPrimary: '#6061F6', colorBorder: '#6061F6' } }}
       >
         <Checkbox checked={complete} onChange={onChangeComplete}>
           <span
-            className={`${complete ? 'todo-complete' : ''} ${isHover ? 'text-white' : 'text-text-color'}`}
+            className={`${complete ? 'todo-complete' : ''} ${isChoose ? 'text-white' : 'text-text-color'}`}
           >
-            {name}
+            {todoname}
           </span>
         </Checkbox>
       </ConfigProvider>
@@ -60,7 +76,7 @@ export default function TodoItem({ id, name, complete, onChangeComplete }) {
                   activeImg={product.activeImg}
                   data={product.data}
                   isLastChild={isLastChild}
-                  isHover={isHover}
+                  isHover={isChoose}
                 />
               )}
             />
@@ -77,3 +93,10 @@ export default function TodoItem({ id, name, complete, onChangeComplete }) {
     </div>
   );
 }
+
+export default connect(
+  (state) => ({
+    selectItem: state.todosReducer,
+  }),
+  { selectTodo },
+)(TodoItem);

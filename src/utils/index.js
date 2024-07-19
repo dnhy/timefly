@@ -6,5 +6,18 @@ function capitalizeFirstLatter(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-// eslint-disable-next-line import/prefer-default-export
-export { capitalizeFirstLatter };
+function handleRoutes(routes) {
+  const obj = routes.find((item) => item.path === '/general' && item.children);
+  if (!obj) {
+    return [];
+  }
+  const { path, children } = obj;
+  const general = children?.map((item) => ({
+    ...item,
+    path: `${path}/${item.path}`,
+  }));
+
+  return general || [];
+}
+
+export { capitalizeFirstLatter, handleRoutes };

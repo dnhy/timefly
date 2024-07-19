@@ -1,19 +1,20 @@
 import React from 'react';
 import { Popover } from 'antd';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { ExclamationCircleTwoTone } from '@ant-design/icons';
-import useHandleRoutes from '@/hooks/useHandleRoutes';
 import { DEFAULTTITLE } from '@/constants';
+import { useCurrRoute } from '@/hooks';
+import { handleRoutes } from '@/utils';
 
 export default function Menubar({ routes, collapse }) {
+  const route = useCurrRoute(routes);
   const { pathname } = useLocation();
+  const general = handleRoutes(routes);
+
+  document.title = route?.meta.title || DEFAULTTITLE;
 
   const navigate = useNavigate();
-  const general = useHandleRoutes(routes);
-  console.log('general :', general);
-
-  const obj = general.find((e) => e.path === pathname);
-  document.title = obj?.meta.title || DEFAULTTITLE;
 
   const content = (
     <div>
