@@ -12,10 +12,7 @@ export default function App() {
   const element = useRoutes(routes);
 
   const [collapse, setCollapse] = useState(false);
-
-  const {
-    meta: { hasDetail },
-  } = useCurrRoute(routes);
+  const hasDetail = useCurrRoute(routes)?.meta?.hasDetail;
 
   function showMenu() {
     setCollapse(!collapse);
@@ -46,7 +43,7 @@ export default function App() {
           {element}
         </div>
         {hasDetail && (
-          <div className="flex-1">
+          <div className="h-screen flex-1  overflow-scroll">
             <Detail />
           </div>
         )}

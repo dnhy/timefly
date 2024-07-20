@@ -81,12 +81,22 @@ function TodoItem({
               )}
             />
           </div>
-          <div className="ml-6 flex">
-            <Tag color="success">success</Tag>
-            <Tag color="processing">processing</Tag>
-            <Tag color="error">error</Tag>
-            <Tag color="warning">warning</Tag>
-            <Tag color="default">default</Tag>
+          <div className="ml-6 flex flex-wrap">
+            <Tag className="mb-2" color="success">
+              success
+            </Tag>
+            <Tag className="mb-2" color="processing">
+              processing
+            </Tag>
+            <Tag className="mb-2" color="error">
+              error
+            </Tag>
+            <Tag className="mb-2" color="warning">
+              warning
+            </Tag>
+            <Tag className="mb-2" color="default">
+              default
+            </Tag>
           </div>
         </>
       )}

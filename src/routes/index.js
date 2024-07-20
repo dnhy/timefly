@@ -7,6 +7,10 @@ import Genetal from '@/pages/General';
 
 export default [
   {
+    path: '/',
+    element: <Navigate to="/general/todo" />,
+  },
+  {
     path: '/general',
     element: <Navigate to="/general/todo" />,
   },
@@ -45,9 +49,5 @@ export default [
         },
       },
     ],
-  },
-  {
-    path: '/',
-    element: <Navigate to="/general/todo" />,
   },
 ];

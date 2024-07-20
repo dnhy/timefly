@@ -20,4 +20,8 @@ function handleRoutes(routes) {
   return general || [];
 }
 
-export { capitalizeFirstLatter, handleRoutes };
+function getTimeStamp(time) {
+  return new Date(time).getTime();
+}
+
+export { capitalizeFirstLatter, handleRoutes, getTimeStamp };

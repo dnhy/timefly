@@ -1,13 +1,13 @@
 /* eslint-disable default-param-last */
 /* eslint-disable import/prefer-default-export */
-import { SELECT_TODO } from '../constant';
+import { TOGGLE } from '../constant';
 
-const selectItem = null;
-export function todosReducer(preState = selectItem, action) {
+const showFormId = '';
+export function comFormReducer(preState = showFormId, action) {
   const { type, data } = action;
   switch (type) {
-    case SELECT_TODO:
-      preState = data;
+    case TOGGLE:
+      preState = preState === data ? '' : data;
       return preState;
     default:
       return preState;
