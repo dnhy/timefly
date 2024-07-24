@@ -5,9 +5,16 @@ import Tabs from '@/components/Tabs';
 import TodoList from '@/components/TodoList';
 import TodoItem from '@/components/TodoItem';
 import { getTodos } from '@/api/data';
+import AddTodo from '@/components/AddTodo';
 
 export default function Todo() {
   const [todos, setTodos] = useState(getTodos);
+  const [tabActive, setTabActive] = useState('1');
+  const [open, setOpen] = useState(false);
+
+  const handleAdd = (isOpen) => {
+    setOpen(isOpen);
+  };
 
   const onChangeComplete = (t) => (e) => {
     e.stopPropagation();
@@ -21,8 +28,6 @@ export default function Todo() {
       }),
     );
   };
-
-  const [tabActive, setTabActive] = useState('1');
 
   return (
     <>
@@ -50,8 +55,9 @@ export default function Todo() {
             size="middle"
             icon={<PlusCircleOutlined />}
             className="rounded-xl px-4 py-5 bg-main-theme"
+            onClick={() => handleAdd(true)}
           >
-            New Task
+            New Todo
           </Button>
         </div>
       </div>
@@ -66,6 +72,8 @@ export default function Todo() {
           ))}
         </TodoList>
       )}
+
+      <AddTodo open={open} handleAdd={handleAdd} />
     </>
   );
 }

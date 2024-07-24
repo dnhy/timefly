@@ -1,4 +1,5 @@
 import React from 'react';
+import PubSub from 'pubsub-js';
 import { Popover } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
@@ -13,6 +14,7 @@ export default function Menubar({ routes, collapse }) {
   const general = handleRoutes(routes);
 
   document.title = route?.meta.title || DEFAULTTITLE;
+  PubSub.publish('routename', route?.meta.title);
 
   const navigate = useNavigate();
 
@@ -27,6 +29,7 @@ export default function Menubar({ routes, collapse }) {
       if (e.meta.forbidden) {
         return;
       }
+      PubSub.publish('routename', e.meta.title);
       navigate(e.path);
     };
   }

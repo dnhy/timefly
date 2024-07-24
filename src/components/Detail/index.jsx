@@ -1,12 +1,24 @@
 import React, { memo } from 'react';
 import { Tag, Empty } from 'antd';
 import { connect } from 'react-redux';
-import { selectTodo } from '@/redux/actions/todos';
+import { likeComment, selectTodo } from '@/redux/actions/todos';
 import Attachs from '@/components/Attachs';
 import Comments from '@/components/Comments';
 import FieldText from '@/components/FieldText';
 
-function Detail({ selectItem }) {
+function Detail({ selectItem, likeComment: likeCommentFunc }) {
+  function handleClickLike(id) {
+    const { comments } = selectItem;
+    const newComments = comments.map((c) => {
+      if (c.id === id) {
+        c.isLike = !c.isLike;
+      }
+
+      return c;
+    });
+
+    likeCommentFunc({ comments: newComments });
+  }
   if (selectItem) {
     const {
       taskname,
@@ -17,6 +29,7 @@ function Detail({ selectItem }) {
       tags,
       attachs,
       comments,
+      percent,
     } = selectItem;
 
     const timeline = createtime?.split(' ')[0];
@@ -25,7 +38,7 @@ function Detail({ selectItem }) {
     return (
       <div className="text-text-color">
         <div className="w-[92%] text-2xl mx-auto my-4">Task Details</div>
-        <div className="w-[92%] rounded-main-theme menu-active h-full mx-auto px-3">
+        <div className="w-[92%] rounded-main-theme menu-active h-full mx-auto px-3 mb-4">
           <div className="text-sm font-ZhankuFont text-grey-text-color  py-2 mx-auto  my-2">
             {taskname}
           </div>
@@ -36,7 +49,7 @@ function Detail({ selectItem }) {
           <div className="mb-10">
             <FieldText name="Timeline" value={timeline} />
             <FieldText name="Time" value={time} />
-            <FieldText name="Progress" value={progressname} />
+            <FieldText name="Progress" value={`${progressname}(${percent}%)`} />
             <FieldText name="Tag">
               {tags
                 ? tags.map((t) => (
@@ -49,7 +62,9 @@ function Detail({ selectItem }) {
             </FieldText>
           </div>
           {attachs?.length > 0 && <Attachs attachs={attachs} />}
-          {comments?.length > 0 && <Comments comments={comments} />}
+          {comments?.length > 0 && (
+            <Comments comments={comments} onLike={handleClickLike} />
+          )}
         </div>
       </div>
     );
@@ -62,5 +77,5 @@ export default connect(
   (state) => ({
     selectItem: state.todosReducer,
   }),
-  { selectTodo },
+  { selectTodo, likeComment },
 )(memo(Detail));

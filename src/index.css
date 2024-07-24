@@ -27,3 +27,41 @@
   -ms-user-select: none; /* IE 10+ */
   user-select: none; /* 标准语法 */
 }
+
+.underline-animate {
+  line-height: 2;
+  background: -webkit-linear-gradient(left, #12c2e9, #c471ed, #f64f59) no-repeat
+    right bottom;
+  background-size: 0% 2px;
+  transition: background-size 500ms linear;
+}
+
+.underline-animate:hover {
+  background-position-x: left;
+  background-size: 100% 2px;
+}
+
+.flip-card {
+  perspective: 1000px; /* 创建3D效果 */
+}
+
+.flip-card-inner {
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg); /* 鼠标悬停时翻转180度 */
+}
+
+.flip-card-front,
+.flip-card-back {
+  backface-visibility: hidden; /* 隐藏翻转的背面 */
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg); /* 确保背面在翻转后正向显示 */
+}

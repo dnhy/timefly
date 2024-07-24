@@ -13,22 +13,22 @@ function TodoItem({
   selectTodo: selectTodoFunc,
   selectItem,
 }) {
-  const { todoname, complete } = todo;
+  const { todoname, complete, tags, attachs, comments, createtime } = todo;
   const dataTags = [
     {
       inActiveImg: require('@/images/img_link.png'),
       activeImg: require('@/images/img_link_white.png'),
-      data: '2121',
+      data: attachs?.length || 0,
     },
     {
       inActiveImg: require('@/images/img_chat.png'),
       activeImg: require('@/images/img_chat_white.png'),
-      data: '789',
+      data: comments?.length || 0,
     },
     {
       inActiveImg: require('@/images/img_calendar_small.png'),
       activeImg: require('@/images/img_calendar_white.png'),
-      data: '2024/8/20',
+      data: createtime?.split(' ')[0],
     },
   ];
   const [isHover, setIsHover] = useState(false);
@@ -48,7 +48,7 @@ function TodoItem({
   }
   return (
     <div
-      className={`rounded-main-theme mb-4 cursor-pointer menu-active mx-6 px-3 py-2 ${isHover ? 'border-main-theme' : ''} ${isChoose ? 'bg-main-theme' : ''} ${complete ? 'bg-[#F6F6F6]' : ''}`}
+      className={`rounded-main-theme mb-4 cursor-pointer menu-active mx-6 px-3 py-2 ${isHover && !isChoose ? 'border-main-theme bg-[#f5f6ff]' : ''} ${isChoose ? 'border-main-theme bg-main-theme' : ''} ${complete ? 'bg-[#F6F6F6]' : ''}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
@@ -82,21 +82,16 @@ function TodoItem({
             />
           </div>
           <div className="ml-6 flex flex-wrap">
-            <Tag className="mb-2" color="success">
-              success
-            </Tag>
-            <Tag className="mb-2" color="processing">
-              processing
-            </Tag>
-            <Tag className="mb-2" color="error">
-              error
-            </Tag>
-            <Tag className="mb-2" color="warning">
-              warning
-            </Tag>
-            <Tag className="mb-2" color="default">
-              default
-            </Tag>
+            {tags ? (
+              tags.map((t) => (
+                // eslint-disable-next-line react/jsx-indent
+                <Tag className="mb-2" key={t.id} color={t.type}>
+                  {t.name}
+                </Tag>
+              ))
+            ) : (
+              <div className="mb-2"> </div>
+            )}
           </div>
         </>
       )}

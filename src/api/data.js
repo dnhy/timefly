@@ -13,6 +13,7 @@ export function getTodos() {
       taskname: 'My Work Task',
       progressid: nanoid(), // 可有可无
       progressname: 'Coding',
+      percent: '30',
 
       tags: [
         { id: '1212wqwqwqw', name: 'Code', type: 'success' },
@@ -32,6 +33,14 @@ export function getTodos() {
           username: 'Alice',
           publishtime: '2023/3/2 12:03',
           content: 'Good idea!',
+          to: null,
+          isLike: false,
+        },
+        {
+          id: 'secondxxxx',
+          username: 'John',
+          publishtime: '2024/3/8 12:03',
+          content: 'A beatuiful website！',
           to: null,
           isLike: false,
         },

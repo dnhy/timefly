@@ -18,7 +18,7 @@ export default function App() {
     setCollapse(!collapse);
   }
   return (
-    <div className="w-full h-full min-h-screen  flex unselectable">
+    <div className="w-full h-full h-screen  flex unselectable">
       <div
         className={`${collapse ? 'w-20' : 'w-80'} bg-grey-color transition-all relative`}
       >
@@ -43,7 +43,7 @@ export default function App() {
           {element}
         </div>
         {hasDetail && (
-          <div className="h-screen flex-1  overflow-scroll">
+          <div className="h-screen flex-1  overflow-y-scroll">
             <Detail />
           </div>
         )}
