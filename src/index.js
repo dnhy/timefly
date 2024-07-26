@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDom from 'react-dom/client';
+// import { config } from 'dotenv';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ConfigProvider } from 'antd';
 import store from '@/redux/store';
 import App from './App';
 import './index.css';
+
+// const env = config().parsed || {};
 
 const root = ReactDom.createRoot(document.getElementById('root'));
 root.render(

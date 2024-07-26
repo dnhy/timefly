@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Slider } from 'antd';
 
-export default function ({ percent, handlePercentChange }) {
+export default function ProgreeDrag({ percent, handlePercentChange }) {
   const handleChange = (val) => {
     handlePercentChange(val);
   };

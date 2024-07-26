@@ -33,7 +33,7 @@ function TodoItem({
   ];
   const [isHover, setIsHover] = useState(false);
 
-  const isChoose = useMemo(() => selectItem?.id === todo.id, [selectItem]);
+  const isChoose = useMemo(() => selectItem?._id === todo._id, [selectItem]);
 
   const handleMouseEnter = () => {
     setIsHover(true);
@@ -85,7 +85,7 @@ function TodoItem({
             {tags ? (
               tags.map((t) => (
                 // eslint-disable-next-line react/jsx-indent
-                <Tag className="mb-2" key={t.id} color={t.type}>
+                <Tag className="mb-2" key={t} color={t.type}>
                   {t.name}
                 </Tag>
               ))

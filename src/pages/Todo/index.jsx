@@ -3,30 +3,14 @@ import { Button } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import Tabs from '@/components/Tabs';
 import TodoList from '@/components/TodoList';
-import TodoItem from '@/components/TodoItem';
-import { getTodos } from '@/api/data';
 import AddTodo from '@/components/AddTodo';
 
 export default function Todo() {
-  const [todos, setTodos] = useState(getTodos);
   const [tabActive, setTabActive] = useState('1');
   const [open, setOpen] = useState(false);
 
   const handleAdd = (isOpen) => {
     setOpen(isOpen);
-  };
-
-  const onChangeComplete = (t) => (e) => {
-    e.stopPropagation();
-    setTodos(
-      todos.map((todo) => {
-        if (todo.id === t.id) {
-          return { ...todo, complete: e.target.checked };
-        } else {
-          return todo;
-        }
-      }),
-    );
   };
 
   return (
@@ -61,17 +45,7 @@ export default function Todo() {
           </Button>
         </div>
       </div>
-      {tabActive === '1' && (
-        <TodoList>
-          {todos.map((t) => (
-            <TodoItem
-              key={t.id}
-              todo={t}
-              onChangeComplete={onChangeComplete(t)}
-            />
-          ))}
-        </TodoList>
-      )}
+      {tabActive === '1' && <TodoList />}
 
       <AddTodo open={open} handleAdd={handleAdd} />
     </>

@@ -49,7 +49,10 @@ function Detail({ selectItem, likeComment: likeCommentFunc }) {
           <div className="mb-10">
             <FieldText name="Timeline" value={timeline} />
             <FieldText name="Time" value={time} />
-            <FieldText name="Progress" value={`${progressname}(${percent}%)`} />
+            <FieldText
+              name="Progress"
+              value={progressname ? `${progressname}(${percent}%)` : ''}
+            />
             <FieldText name="Tag">
               {tags
                 ? tags.map((t) => (
